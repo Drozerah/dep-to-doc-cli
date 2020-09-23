@@ -42,13 +42,12 @@ const runCliAsync = async () => {
   const { isComfirmed } = await prompt(questions)
   debug('↪ get user response:')
   debug(` ↪ ${isComfirmed}`)
+  // check user response
   if (isComfirmed === 'no') {
     lib.exit('user_cancelation') // exit CLI
   } else {
-    // await lib.accessFileAsync() // ERR_INVALID_ARG_TYPE
-    // await lib.accessFileAsync(123) // ERR_INVALID_ARG_TYPE
+    // check if both required files are accessible
     await lib.accessFileAsync('package.json')
-    // await lib.accessFileAsync('FILE_NOT_FOUND.ext') // ENOENT
     await lib.accessFileAsync('README.md')
 
     debug('↪ continue CLI process')
