@@ -129,3 +129,35 @@ describe('Test suit for ƒ exit', function () {
     stub.restore()
   })
 })
+
+describe('Test suit for ƒ readFileAsync Promise', function () {
+  it('Promise rejected with TypeError and error code', function () {
+    this.timeout(0)
+    return expect(lib.readFileAsync()).to.eventually.be.rejected.then((error) => {
+      expect(error.name).to.equal('TypeError')
+      expect(error.code).to.equal('ERR_INVALID_ARG_TYPE')
+    })
+  })
+  it('Promise rejected with Error and error code', function () {
+    this.timeout(0)
+    return expect(lib.readFileAsync(123)).to.eventually.be.rejected.then((error) => {
+      expect(error.name).to.equal('Error')
+      expect(error.code).to.equal('EBADF')
+    })
+  })
+  it('Promise rejected with Error and error code', function () {
+    this.timeout(0)
+    return expect(lib.readFileAsync('./specs/test/FILE_NOT_FOUND.ext')).to.eventually.be.rejected.then((error) => {
+      expect(error.name).to.equal('Error')
+      expect(error.code).to.equal('ENOENT')
+    })
+  })
+  it('Promise resolved with response Object', function () {
+    this.timeout(0)
+    const file_path = './specs/test/test.md'
+    return expect(lib.readFileAsync(file_path)).to.eventually.be.fulfilled.then((res) => {
+      expect(res.response).to.equal(true)
+      expect(res.data).to.equal('# This is a test file')
+    })
+  })
+})
