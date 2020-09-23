@@ -1,0 +1,5 @@
+node_modules
+dev.js
+docs.md
+.nyc_output
+public

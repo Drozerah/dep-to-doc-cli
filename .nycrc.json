@@ -1,0 +1,10 @@
+{
+  "include": "lib",
+  "exclude": "specs",
+  "check-coverage": true,
+  "lines": 50,
+  "functions": 10,
+  "statements": 10,
+  "report-dir": "./public/reports",
+  "ignore-class-method": ["debug"]
+}
