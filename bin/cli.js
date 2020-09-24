@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 'use strict'
 /**
- * Node Core Modules
- */
-const fs = require('fs')
-/**
  * NPM modules
  */
 const debug = require('debug')('cli')
@@ -52,17 +48,18 @@ const runCliAsync = async () => {
   } else {
     debug('STEP 2')
     // * step 2 working with data
-    // create empty data Object
-    let data = { dependencies: null, devDependencies: null }
-    // check if both required files are accessible
+    // check if package.json file is accessible
     let package_json = await lib.accessFileAsync('package.json')
-    let readme_md = await lib.accessFileAsync('README.md')
     // get/read data from package.json file
     package_json = await lib.readFileAsync(package_json.file)
     // parse data to js format
     package_json = JSON.parse(package_json.data)
+    // extract dependencies
+    const data = await lib.extractDependenciesAsync(package_json)
 
-    debug('====>', package_json)
+    // let readme_md = await lib.accessFileAsync('README.md')
+
+    debug('====>', data)
     debug('↪ continue CLI process')
     return 'Done !'
   }

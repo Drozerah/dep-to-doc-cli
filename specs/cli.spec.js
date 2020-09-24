@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 /**
+ * Node Core Modules
+ */
+const fs = require('fs')
+/**
  *  NPM modules
  */
 const debug = require('debug')('test')
@@ -158,6 +162,35 @@ describe('Test suit for ƒ readFileAsync Promise', function () {
     return expect(lib.readFileAsync(file_path)).to.eventually.be.fulfilled.then((res) => {
       expect(res.response).to.equal(true)
       expect(res.data).to.equal('# This is a test file')
+    })
+  })
+})
+
+describe('Test suit for ƒ extractDependenciesAsync', function () {
+  it('Promise rejected with TypeError and error code', function () {
+    this.timeout(0)
+    return expect(lib.extractDependenciesAsync()).to.eventually.be.rejected.then((error) => {
+      expect(error.name).to.equal('TypeError')
+    })
+  })
+  it('Promise resolved with response Object', function () {
+    this.timeout(0)
+    const file_path = './specs/test/test_package.json'
+    let data = fs.readFileSync(file_path, 'utf-8')
+    data = JSON.parse(data)
+    const expected_data_structure = { dependencies: ['web_dev'], devDependencies: ['drozerah'] }
+    return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
+      expect(res).to.deep.equal(expected_data_structure)
+    })
+  })
+  it('Promise resolved with response Object', function () {
+    this.timeout(0)
+    const file_path = './specs/test/test_2_package.json'
+    let data = fs.readFileSync(file_path, 'utf-8')
+    data = JSON.parse(data)
+    const expected_data_structure = { dependencies: null, devDependencies: ['drozerah'] }
+    return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
+      expect(res).to.deep.equal(expected_data_structure)
     })
   })
 })

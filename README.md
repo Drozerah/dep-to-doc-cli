@@ -4,7 +4,7 @@
 
 > TODO: write a better README.md
 
-- [nyc report](http://127.0.0.1:5500/reports/index.html)
+- [nyc report](http://127.0.0.1:5500/public/reports/index.html)
 
 __Author__
 

@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "drozerah": "1.0.0"
+  },
+  "dependencies": {
+    "web_dev": "1.0.0"
+  }
+}
