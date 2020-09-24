@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 'use strict'
 /**
+ * Node Core Modules
+ */
+const util = require('util')
+/**
  * NPM modules
  */
 const debug = require('debug')('cli')
@@ -35,7 +39,8 @@ const runCliAsync = async () => {
   // start message
   debug('↪ show starting message')
   console.log(blue('Hello !'))
-  // * step 1 prompt the user
+  // * STEP 1. prompt the user
+  debug('STEP 1')
   debug('ƒ call prompt')
   debug('↪ ask user for comfirmation:')
   debug(` ↪ ${questions[0].message}`)
@@ -47,7 +52,7 @@ const runCliAsync = async () => {
     lib.exit('user_cancelation') // exit CLI
   } else {
     debug('STEP 2')
-    // * step 2 working with data
+    // * STEP 2. working with data
     // check if package.json file is accessible
     let package_json = await lib.accessFileAsync('package.json')
     // get/read data from package.json file
@@ -55,11 +60,22 @@ const runCliAsync = async () => {
     // parse data to js format
     package_json = JSON.parse(package_json.data)
     // extract dependencies
-    const data = await lib.extractDependenciesAsync(package_json)
-
+    let data = await lib.extractDependenciesAsync(package_json)
+    // structuring data
+    data = await lib.structuringDataAsync(data)
+    debug('STEP 3')
+    // * STEP 3. create template
+    // TODO
+    // [ ] tests for structuringDataAsync
+    // [ ] jsdoc for structuringDataAsync
+    // [ ] create template (step 3)
+    // [ ] work with REAME.md
+    // debug data Object
+    debug(util.inspect(data, {
+      showHidden: false,
+      depth: null
+    }))
     // let readme_md = await lib.accessFileAsync('README.md')
-
-    debug('====>', data)
     debug('↪ continue CLI process')
     return 'Done !'
   }
@@ -77,5 +93,6 @@ runCliAsync()
   .catch(err => {
     debug('↪ .catch')
     // check errors
+    debug(' ↪\n', err)
     return lib.ErrorHandler(err)
   })
