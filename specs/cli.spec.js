@@ -4,6 +4,7 @@
  * Node Core Modules
  */
 const fs = require('fs')
+const path = require('path')
 /**
  *  NPM modules
  */
@@ -22,8 +23,15 @@ debug('[APP][processing]', __filename.replace(process.cwd(), ''))
 /**
  * Modules
  */
-const { dummyPromise } = require('./test/dummy_promise')
+const { dummyPromise } = require('./test/data/promise')
 const lib = require('../lib/')
+/**
+ * Testing Data
+ */
+const {
+  structuringDataAsync_expected_data_structure_1,
+  structuringDataAsync_input_data_structure_1
+} = require('./test/data/structuringDataAsync')
 
 // Snippet
 // describe('', function () {
@@ -62,14 +70,14 @@ describe('Test suit for ƒ accessFileAsync Promise', function () {
   })
   it('Promise rejected with Error and error code', function () {
     this.timeout(0)
-    return expect(lib.accessFileAsync('./specs/test/FILE_NOT_FOUND.ext')).to.eventually.be.rejected.then((error) => {
+    return expect(lib.accessFileAsync('./specs/test/data/markdown/FILE_NOT_FOUND.ext')).to.eventually.be.rejected.then((error) => {
       expect(error.name).to.equal('Error')
       expect(error.code).to.equal('ENOENT')
     })
   })
   it('Promise resolved with response Object', function () {
     this.timeout(0)
-    const file_path = './specs/test/test.md'
+    const file_path = './specs/test/data/markdown/test.md'
     return expect(lib.accessFileAsync(file_path)).to.eventually.be.fulfilled.then((res) => {
       expect(res.response).to.equal(true)
       expect(res.file).to.equal(file_path)
@@ -151,14 +159,14 @@ describe('Test suit for ƒ readFileAsync Promise', function () {
   })
   it('Promise rejected with Error and error code', function () {
     this.timeout(0)
-    return expect(lib.readFileAsync('./specs/test/FILE_NOT_FOUND.ext')).to.eventually.be.rejected.then((error) => {
+    return expect(lib.readFileAsync('./specs/test/data/markdown/FILE_NOT_FOUND.ext')).to.eventually.be.rejected.then((error) => {
       expect(error.name).to.equal('Error')
       expect(error.code).to.equal('ENOENT')
     })
   })
   it('Promise resolved with response Object', function () {
     this.timeout(0)
-    const file_path = './specs/test/test.md'
+    const file_path = './specs/test/data/markdown/test.md'
     return expect(lib.readFileAsync(file_path)).to.eventually.be.fulfilled.then((res) => {
       expect(res.response).to.equal(true)
       expect(res.data).to.equal('# This is a test file')
@@ -175,7 +183,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
   })
   it('Promise resolved with response Object', function () {
     this.timeout(0)
-    const file_path = './specs/test/test_package.json'
+    const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_1_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
     const expected_data_structure = { dependencies: ['web_dev'], devDependencies: ['drozerah'] }
@@ -185,12 +193,50 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
   })
   it('Promise resolved with response Object', function () {
     this.timeout(0)
-    const file_path = './specs/test/test_2_package.json'
+    const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_2_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
     const expected_data_structure = { dependencies: null, devDependencies: ['drozerah'] }
     return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
       expect(res).to.deep.equal(expected_data_structure)
     })
+  })
+})
+
+describe('Test suit for ƒ createMarkdownLink', function () {
+  it('should throw with TypeError', function () {
+    expect(() => lib.createMarkdownLink()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
+  })
+  it('should return a markdow formated link', function () {
+    const link_url = 'https://github.com/drozerah'
+    const link_text = 'Drozerah'
+    expect(lib.createMarkdownLink(link_url, link_text)).to.be.a('string')
+    expect(lib.createMarkdownLink(link_url, link_text)).to.equals(`[${link_text}](${link_url})`)
+  })
+  it('should return alternate text content', function () {
+    const link_text = 'Drozerah'
+    expect(lib.createMarkdownLink(undefined, link_text)).to.be.a('string')
+    expect(lib.createMarkdownLink(undefined, link_text)).to.equals('Link not available')
+  })
+})
+
+describe('Test suit for ƒ structuringDataAsync', function () {
+  it('Promise rejected with TypeError', function () {
+    this.timeout(0)
+    return expect(lib.structuringDataAsync()).to.eventually.be.rejected.then((error) => {
+      expect(error.name).to.equal('TypeError')
+    })
+  })
+  it('Promise resolved should call createMarkdownLink', function () {
+    const spy = sinon.spy(lib, 'createMarkdownLink')
+    this.timeout(0)
+    return expect(lib.structuringDataAsync(structuringDataAsync_input_data_structure_1))
+      .to.eventually.be.fulfilled.then((res) => {
+        expect(res).to.deep.equal(structuringDataAsync_expected_data_structure_1)
+      })
+      .then((res) => {
+        expect(spy.called).to.be.true
+        spy.restore()
+      })
   })
 })

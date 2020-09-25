@@ -3,7 +3,7 @@
 /**
  * Node Core Modules
  */
-const util = require('util')
+// const util = require('util')
 /**
  * NPM modules
  */
@@ -58,23 +58,26 @@ const runCliAsync = async () => {
     // get/read data from package.json file
     package_json = await lib.readFileAsync(package_json.file)
     // parse data to js format
-    package_json = JSON.parse(package_json.data)
+    let data = JSON.parse(package_json.data)
     // extract dependencies
-    let data = await lib.extractDependenciesAsync(package_json)
+    data = await lib.extractDependenciesAsync(data)
     // structuring data
-    data = await lib.structuringDataAsync(data)
+    await lib.structuringDataAsync(data)
+
     debug('STEP 3')
     // * STEP 3. create template
     // TODO
-    // [ ] tests for structuringDataAsync
+    // [X] tests for createMarkdownLink
+    // [X] jsdoc for createMarkdownLink
+    // [X] tests for structuringDataAsync
     // [ ] jsdoc for structuringDataAsync
     // [ ] create template (step 3)
-    // [ ] work with REAME.md
+    // [ ] work with README.md
     // debug data Object
-    debug(util.inspect(data, {
-      showHidden: false,
-      depth: null
-    }))
+    // debug(util.inspect(data, {
+    //   showHidden: false,
+    //   depth: null
+    // }))
     // let readme_md = await lib.accessFileAsync('README.md')
     debug('↪ continue CLI process')
     return 'Done !'
