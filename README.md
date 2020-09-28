@@ -1,10 +1,12 @@
 # Dependencies To Documentation
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 > Document your npm dependencies into your README.md file
 
 > TODO: write a better README.md
 
-- [nyc report](http://127.0.0.1:5500/public/reports/index.html)
+- [nyc report](/public/reports/index.html)
 
 __Author__
 

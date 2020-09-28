@@ -71,7 +71,7 @@ const runCliAsync = async () => {
     // [X] JSDoc for createMarkdownLink
     // [X] test suit for structuringDataAsync
     // [X] JSDoc for structuringDataAsync
-    // [ ] Update JSDoc template
+    // [X] Update JSDoc template
     // [ ] create template (step 3)
     // [ ] work with README.md
     // debug data Object

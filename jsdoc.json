@@ -1,17 +1,35 @@
 {
+  "tags": {
+    "allowUnknownTags": ["category", "mermaid"]
+  },
   "source": {
     "include": ["lib"],
     "includePattern": ".js$",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules|public|specs)"
   },
-  "plugins": ["plugins/markdown"],
-  "templates": {
-    "cleverLinks": true,
-    "monospaceLinks": true
-  },
+  "recurseDepth": 10,
   "opts": {
     "recurse": true,
+    "verbose": true,
     "destination": "./public/docs/",
-    "readme": "./readme.md"
+    "readme": "./readme.md",
+    "template": "node_modules/better-docs"
+  },
+  "plugins": ["plugins/markdown", "jsdoc-mermaid", "node_modules/better-docs/category"],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true,
+    "better-docs": {
+      "search": false,
+      "name": "dep_to_doc_cli CLI Documentation",
+      "title": "dep_to_doc_cli",
+      "___css": "style.css",
+      "hideGenerator": false,
+      "navLinks": [{
+          "label": "Github Drozerah",
+          "href": "https://github.com/Drozerah"
+        }
+      ]
+    }
   }
 }
