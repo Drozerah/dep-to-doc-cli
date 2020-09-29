@@ -76,7 +76,7 @@ const runCliAsync = async () => {
     // [X] JSDoc for structuringDataAsync
     // [X] create template (step 3)
     // [X] Update JSDoc for createTemplate
-    // [ ] Test suit for createTemplate
+    // [X] Test suit for createTemplate
     // [ ] work with README.md
     // debug data Object
     // debug(util.inspect(data, {

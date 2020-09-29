@@ -33,6 +33,8 @@ const {
   structuringDataAsync_input_data_structure_1
 } = require('./test/data/structuringDataAsync')
 
+const template_chunks = require('./test/data/template/index')
+
 // Snippet
 // describe('', function () {
 //   it('', function () {
@@ -238,5 +240,19 @@ describe('Test suit for ƒ structuringDataAsync', function () {
         expect(spy.called).to.be.true
         spy.restore()
       })
+  })
+})
+
+describe('Test suit for ƒ createTemplate', function () {
+  it('should throw with TypeError', function () {
+    expect(() => lib.createTemplate()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
+  })
+  it('should render a well formatted template', function () {
+    const expected_result = structuringDataAsync_expected_data_structure_1
+
+    expect(lib.createTemplate(expected_result)).to.be.a('string')
+    expect(lib.createTemplate(expected_result)).to.have.length.above(10)
+    expect(lib.createTemplate(expected_result)).to.contains(template_chunks.dependencies)
+    expect(lib.createTemplate(expected_result)).to.contains(template_chunks.devDependencies)
   })
 })
