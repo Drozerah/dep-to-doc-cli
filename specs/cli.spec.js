@@ -215,10 +215,10 @@ describe('Test suit for ƒ createMarkdownLink', function () {
     expect(lib.createMarkdownLink(link_url, link_text)).to.be.a('string')
     expect(lib.createMarkdownLink(link_url, link_text)).to.equals(`[${link_text}](${link_url})`)
   })
-  it('should return alternate text content', function () {
+  it('should return the package name only', function () {
     const link_text = 'Drozerah'
     expect(lib.createMarkdownLink(undefined, link_text)).to.be.a('string')
-    expect(lib.createMarkdownLink(undefined, link_text)).to.equals('Link not available')
+    expect(lib.createMarkdownLink(undefined, link_text)).to.equals(link_text)
   })
 })
 
