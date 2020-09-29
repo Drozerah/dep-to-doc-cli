@@ -14,8 +14,8 @@ const structuringDataAsync_expected_data_structure_1 = {
         package: {
           name: 'inquirer',
           description: {
-            string: 'A collection of common interactive command line user interfaces.',
-            length: 64
+            string: 'A collection of common interactive command line user interfaces',
+            length: 63
           },
           url: 'https://github.com/SBoudrias/Inquirer.js#readme',
           markdown_link: {
@@ -26,7 +26,7 @@ const structuringDataAsync_expected_data_structure_1 = {
       }
     ],
     max_link_length: 59,
-    max_description_length: 64
+    max_description_length: 63
   },
   devDependencies: {
     packages: [
@@ -34,7 +34,7 @@ const structuringDataAsync_expected_data_structure_1 = {
         package: {
           name: 'mocha',
           description: {
-            string: 'simple, flexible, fun test framework',
+            string: 'Simple, flexible, fun test framework',
             length: 36
           },
           url: 'https://mochajs.org/',
