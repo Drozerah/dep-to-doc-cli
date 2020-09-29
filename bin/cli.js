@@ -38,8 +38,8 @@ const runCliAsync = async () => {
   debug('ƒ call runCliAsync')
   // start message
   debug('↪ show starting message')
-  console.log(blue('Hello !'))
   // * STEP 1. prompt the user
+  console.log(blue('Hello !'))
   debug('STEP 1')
   debug('ƒ call prompt')
   debug('↪ ask user for comfirmation:')
@@ -51,8 +51,8 @@ const runCliAsync = async () => {
   if (isComfirmed === 'no') {
     lib.exit('user_cancelation') // exit CLI
   } else {
-    debug('STEP 2')
     // * STEP 2. working with data
+    debug('STEP 2')
     // check if package.json file is accessible
     let package_json = await lib.accessFileAsync('package.json')
     // get/read data from package.json file
@@ -62,17 +62,21 @@ const runCliAsync = async () => {
     // extract dependencies
     data = await lib.extractDependenciesAsync(data)
     // structuring data
-    await lib.structuringDataAsync(data)
-
-    debug('STEP 3')
+    data = await lib.structuringDataAsync(data)
     // * STEP 3. create template
+    debug('STEP 3')
+    // create template from data
+    // eslint-disable-next-line no-unused-vars
+    const template = lib.createTemplate(data)
+
     // TODO
     // [X] test suit for createMarkdownLink
     // [X] JSDoc for createMarkdownLink
     // [X] test suit for structuringDataAsync
     // [X] JSDoc for structuringDataAsync
-    // [X] Update JSDoc template
-    // [ ] create template (step 3)
+    // [X] create template (step 3)
+    // [X] Update JSDoc for createTemplate
+    // [ ] Test suit for createTemplate
     // [ ] work with README.md
     // debug data Object
     // debug(util.inspect(data, {
