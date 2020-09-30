@@ -55,6 +55,10 @@ const runCliAsync = async () => {
     debug('STEP 2')
     // check if package.json file is accessible
     let package_json = await lib.accessFileAsync('package.json')
+    // check if README.md file is accessible
+    // const md = await lib.accessFileAsync('test.md')
+    const md = await lib.accessFileAsync('readme.md')
+    console.log(md.file) // !DEBUG
     // get/read data from package.json file
     package_json = await lib.readFileAsync(package_json.file)
     // parse data to js format
@@ -68,6 +72,25 @@ const runCliAsync = async () => {
     // create template from data
     // eslint-disable-next-line no-unused-vars
     const template = lib.createTemplate(data)
+    // * STEP 4. work work with README.md
+    debug('STEP 4')
+
+    // const addTemplate = function (file) {
+    //   fs.readFile(file, 'utf8', function (err, data) {
+    //     if (err) {
+    //       return console.log(err)
+    //     }
+    //     var result = data.replace(/~~{dependencies}~~/, template)
+
+    //     fs.writeFile(file, result, 'utf8', function (err) {
+    //       if (err) return console.log(err)
+    //       console.log('Done!') // !DEBUG
+    //     })
+    //   })
+    // }
+    // addTemplate(md.file)
+    await lib.addTemplateAsync(md.file, template)
+    // await lib.addTemplateAsync()
 
     // TODO
     // [X] test suit for createMarkdownLink
@@ -77,7 +100,9 @@ const runCliAsync = async () => {
     // [X] create template (step 3)
     // [X] Update JSDoc for createTemplate
     // [X] Test suit for createTemplate
-    // [ ] work with README.md
+    // [X] add link to template signature
+    // [ ] work with README.md (step 4)
+    // [X] Test suit for addTemplateAsync
     // debug data Object
     // debug(util.inspect(data, {
     //   showHidden: false,
@@ -101,6 +126,8 @@ runCliAsync()
   .catch(err => {
     debug('↪ .catch')
     // check errors
-    debug(' ↪\n', err)
+    debug('err =>>>', err)
+    debug('err.code =>>>', err.code)
+    debug('err.message =>>>', err.message)
     return lib.ErrorHandler(err)
   })
