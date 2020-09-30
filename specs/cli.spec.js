@@ -25,6 +25,7 @@ debug('[APP][processing]', __filename.replace(process.cwd(), ''))
  */
 const { dummyPromise } = require('./test/data/promise')
 const lib = require('../lib/')
+const helper = require('./test/helpers')
 /**
  * Testing Data
  */
@@ -55,7 +56,7 @@ describe('Test suit for ƒ dummy Promise', function () {
   })
 })
 
-describe('Test suit for ƒ accessFileAsync Promise', function () {
+describe('Test suit for ƒ accessFileAsync', function () {
   it('Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.accessFileAsync()).to.eventually.be.rejected.then((error) => {
@@ -144,7 +145,7 @@ describe('Test suit for ƒ exit', function () {
   })
 })
 
-describe('Test suit for ƒ readFileAsync Promise', function () {
+describe('Test suit for ƒ readFileAsync', function () {
   it('Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.readFileAsync()).to.eventually.be.rejected.then((error) => {
@@ -254,5 +255,51 @@ describe('Test suit for ƒ createTemplate', function () {
     expect(lib.createTemplate(expected_result)).to.have.length.above(10)
     expect(lib.createTemplate(expected_result)).to.contains(template_chunks.dependencies)
     expect(lib.createTemplate(expected_result)).to.contains(template_chunks.devDependencies)
+  })
+})
+
+describe('Test suit for ƒ addTemplateAsync', function () {
+  before(function (done) {
+    return helper.removeTemplateBeforeSync(done)
+  })
+  it('should throw with TypeError', function () {
+    expect(lib.addTemplateAsync).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
+  })
+  it('Promise rejected with file not found', function () {
+    this.timeout(0)
+    const template = template_chunks.template
+    const file_path_error = 'not-found-file.md'
+    return expect(lib.addTemplateAsync(file_path_error, template)).to.eventually.be.rejected.then((error) => {
+      // console.log('---------Error----------') // !DEBUG
+      // console.log(error) // !DEBUG
+      // console.log(error.name) // !DEBUG
+      // console.log(error.code) // !DEBUG
+      // console.log(error.message) // !DEBUG
+      // console.log('------------------------') // !DEBUG
+      expect(error.name).to.equal('Error')
+      expect(error.code).to.equal('ENOENT')
+    })
+  })
+  it('should reject with tag error', function () {
+    this.timeout(0)
+    const template = template_chunks.template
+    const file_path = path.join(process.cwd(), 'specs/test/data/markdown/test.md')
+    return expect(lib.addTemplateAsync(file_path, template)).to.eventually.be.rejected.then((error) => {
+      // console.log('--------ERROR---------') // !DEBUG
+      // console.log(error) // !DEBUG
+      // console.log(error.name) // !DEBUG
+      // console.log(error.message) // !DEBUG
+      // console.log('----------------------') // !DEBUG
+      expect(error.name).to.equal('Error')
+      expect(error.message).to.equal('Tag not found')
+    })
+  })
+  it('should resolve with true type response', function () {
+    this.timeout(0)
+    const template = template_chunks.template
+    const file_path = path.join(process.cwd(), 'specs/test/data/markdown/test_ok.md')
+    return expect(lib.addTemplateAsync(file_path, template)).to.eventually.be.fulfilled.then((res) => {
+      expect(res).to.equal(true)
+    })
   })
 })
