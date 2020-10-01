@@ -58,7 +58,6 @@ const runCliAsync = async () => {
     // check if README.md file is accessible
     // const md = await lib.accessFileAsync('test.md')
     const md = await lib.accessFileAsync('readme.md')
-    console.log(md.file) // !DEBUG
     // get/read data from package.json file
     package_json = await lib.readFileAsync(package_json.file)
     // parse data to js format
@@ -70,27 +69,10 @@ const runCliAsync = async () => {
     // * STEP 3. create template
     debug('STEP 3')
     // create template from data
-    // eslint-disable-next-line no-unused-vars
     const template = lib.createTemplate(data)
     // * STEP 4. work work with README.md
     debug('STEP 4')
-
-    // const addTemplate = function (file) {
-    //   fs.readFile(file, 'utf8', function (err, data) {
-    //     if (err) {
-    //       return console.log(err)
-    //     }
-    //     var result = data.replace(/~~{dependencies}~~/, template)
-
-    //     fs.writeFile(file, result, 'utf8', function (err) {
-    //       if (err) return console.log(err)
-    //       console.log('Done!') // !DEBUG
-    //     })
-    //   })
-    // }
-    // addTemplate(md.file)
     await lib.addTemplateAsync(md.file, template)
-    // await lib.addTemplateAsync()
 
     // TODO
     // [X] test suit for createMarkdownLink
@@ -101,7 +83,7 @@ const runCliAsync = async () => {
     // [X] Update JSDoc for createTemplate
     // [X] Test suit for createTemplate
     // [X] add link to template signature
-    // [ ] work with README.md (step 4)
+    // [X] work with README.md (step 4)
     // [X] Test suit for addTemplateAsync
     // debug data Object
     // debug(util.inspect(data, {

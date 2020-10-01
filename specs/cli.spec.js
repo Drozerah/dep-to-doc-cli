@@ -99,25 +99,35 @@ describe('Test suit for ƒ ErrorHandler', function () {
     expect(() => lib.ErrorHandler(false)).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
     expect(() => lib.ErrorHandler(() => {})).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
   })
-  it('should call ƒ exit once with argument', function () {
+  it('1 should call ƒ exit once with argument', function () {
     const spy = sinon.spy(lib, 'exit')
     const arg = "Error: no such file 'DROZERAH'"
     const obj = {
       code: 'ENOENT',
-      value: 'DROZERAH'
+      value: 'DROZERAH' // this case needs value
     }
     lib.ErrorHandler(obj)
     expect(spy.calledOnce).to.be.true
     expect(spy.calledWith(arg)).to.be.true
-    // expect(spy.returned(arg)).to.be.true
     spy.restore()
   })
-  it('should call ƒ exit once with argument', function () {
+
+  it('2 should call ƒ exit once with argument', function () {
     const spy = sinon.spy(lib, 'exit')
     const arg = 'TypeError: invalid argument type'
     const obj = {
-      code: 'ERR_INVALID_ARG_TYPE',
-      value: 'DROZERAH'
+      code: 'ERR_INVALID_ARG_TYPE'
+    }
+    lib.ErrorHandler(obj)
+    expect(spy.calledOnce).to.be.true
+    expect(spy.calledWith(arg)).to.be.true
+    spy.restore()
+  })
+  it('3 should call ƒ exit once with argument %', function () {
+    const spy = sinon.spy(lib, 'exit')
+    const arg = 'Tag not found'
+    const obj = {
+      code: 'ERR_TAG_NOT_FOUND'
     }
     lib.ErrorHandler(obj)
     expect(spy.calledOnce).to.be.true
@@ -139,8 +149,16 @@ describe('Test suit for ƒ exit', function () {
     const stub = sinon.stub(console, 'log')
     const arg = 'user_cancelation'
     lib.exit(arg)
-    expect(console.log.calledOnce).to.be.false
-    // expect(console.log.calledWith(arg)).to.be.true
+    expect(stub.calledWith(arg)).to.be.true
+    expect(stub.calledThrice).to.be.true
+    stub.restore()
+  })
+  it('should log "Tag not found"', function () {
+    const stub = sinon.stub(console, 'log')
+    const arg = 'Tag not found'
+    lib.exit(arg)
+    expect(stub.calledWith(arg)).to.be.true
+    expect(stub.calledThrice).to.be.true
     stub.restore()
   })
 })
@@ -280,7 +298,7 @@ describe('Test suit for ƒ addTemplateAsync', function () {
       expect(error.code).to.equal('ENOENT')
     })
   })
-  it('should reject with tag error', function () {
+  it('Promise rejected with tag error', function () {
     this.timeout(0)
     const template = template_chunks.template
     const file_path = path.join(process.cwd(), 'specs/test/data/markdown/test.md')
@@ -294,7 +312,7 @@ describe('Test suit for ƒ addTemplateAsync', function () {
       expect(error.message).to.equal('Tag not found')
     })
   })
-  it('should resolve with true type response', function () {
+  it('Promise resolved with true type response', function () {
     this.timeout(0)
     const template = template_chunks.template
     const file_path = path.join(process.cwd(), 'specs/test/data/markdown/test_ok.md')
