@@ -195,7 +195,7 @@ describe('Test suit for ƒ readFileAsync', function () {
   })
 })
 
-describe.only('Test suit for ƒ extractDependenciesAsync', function () {
+describe('Test suit for ƒ extractDependenciesAsync', function () {
   it('1 Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.extractDependenciesAsync()).to.eventually.be.rejected.then((error) => {
@@ -222,7 +222,7 @@ describe.only('Test suit for ƒ extractDependenciesAsync', function () {
       expect(res).to.deep.equal(expected_data_structure)
     })
   })
-  it('4  Promise resolved with response Object', function () {
+  it('4 Promise resolved with response Object', function () {
     this.timeout(0)
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_3_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
