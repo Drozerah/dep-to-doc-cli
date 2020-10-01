@@ -195,14 +195,14 @@ describe('Test suit for ƒ readFileAsync', function () {
   })
 })
 
-describe('Test suit for ƒ extractDependenciesAsync', function () {
-  it('Promise rejected with TypeError and error code', function () {
+describe.only('Test suit for ƒ extractDependenciesAsync', function () {
+  it('1 Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.extractDependenciesAsync()).to.eventually.be.rejected.then((error) => {
       expect(error.name).to.equal('TypeError')
     })
   })
-  it('Promise resolved with response Object', function () {
+  it('2 Promise resolved with response Object', function () {
     this.timeout(0)
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_1_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
@@ -212,12 +212,22 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
       expect(res).to.deep.equal(expected_data_structure)
     })
   })
-  it('Promise resolved with response Object', function () {
+  it('3 Promise resolved with response Object', function () {
     this.timeout(0)
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_2_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
     const expected_data_structure = { dependencies: null, devDependencies: ['drozerah'] }
+    return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
+      expect(res).to.deep.equal(expected_data_structure)
+    })
+  })
+  it('4  Promise resolved with response Object', function () {
+    this.timeout(0)
+    const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_3_package.json')
+    let data = fs.readFileSync(file_path, 'utf-8')
+    data = JSON.parse(data)
+    const expected_data_structure = { dependencies: ['web_dev'], devDependencies: null }
     return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
       expect(res).to.deep.equal(expected_data_structure)
     })
