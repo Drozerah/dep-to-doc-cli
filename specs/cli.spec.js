@@ -101,7 +101,7 @@ describe('Test suit for ƒ ErrorHandler', function () {
   })
   it('1 should call ƒ exit once with argument', function () {
     const spy = sinon.spy(lib, 'exit')
-    const arg = "Error: no such file 'DROZERAH'"
+    const arg = "Error: no such file or directory 'DROZERAH'"
     const obj = {
       code: 'ENOENT',
       value: 'DROZERAH' // this case needs value
@@ -123,7 +123,7 @@ describe('Test suit for ƒ ErrorHandler', function () {
     expect(spy.calledWith(arg)).to.be.true
     spy.restore()
   })
-  it('3 should call ƒ exit once with argument %', function () {
+  it('3 should call ƒ exit once with argument', function () {
     const spy = sinon.spy(lib, 'exit')
     const arg = 'Tag not found'
     const obj = {
