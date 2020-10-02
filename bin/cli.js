@@ -53,38 +53,49 @@ const runCliAsync = async () => {
   } else {
     // * STEP 2. working with data
     debug('STEP 2')
-    // check if package.json file is accessible
-    let package_json = await lib.accessFileAsync('package.json')
-    // check if README.md file is accessible
-    // const md = await lib.accessFileAsync('test.md')
+
+    // check access to package.json file
+    const package_json = await lib.accessFileAsync('package.json')
+
+    // check access to README.md file
     const md = await lib.accessFileAsync('readme.md')
-    // get/read data from package.json file
-    package_json = await lib.readFileAsync(package_json.file)
-    // parse data to js format
-    let data = JSON.parse(package_json.data)
+
+    // check access to node_modules directory
+    await lib.accessFileAsync('node_modules')
+
+    // read data from package.json file
+    let data = await lib.readFileAsync(package_json.file)
+
+    // parse JSON to js Object
+    data = await JSON.parse(data.data)
+
+    // check dependencies from data Object
+    data = await lib.checkDependencies(data)
+
     // extract dependencies
     data = await lib.extractDependenciesAsync(data)
+
     // structuring data
     data = await lib.structuringDataAsync(data)
+
     // * STEP 3. create template
     debug('STEP 3')
+
     // create template from data
     const template = lib.createTemplate(data)
+
     // * STEP 4. work work with README.md
     debug('STEP 4')
     await lib.addTemplateAsync(md.file, template)
 
     // TODO
-    // [X] test suit for createMarkdownLink
-    // [X] JSDoc for createMarkdownLink
-    // [X] test suit for structuringDataAsync
-    // [X] JSDoc for structuringDataAsync
-    // [X] create template (step 3)
-    // [X] Update JSDoc for createTemplate
-    // [X] Test suit for createTemplate
-    // [X] add link to template signature
-    // [X] work with README.md (step 4)
-    // [X] Test suit for addTemplateAsync
+    // [ ] [checkDependencies] add test suit
+    // [ ] [extractDependenciesAsync] add test cases for empty Objects + files
+    // [ ] [createTemplate][signature] add dynamic version and cli name
+    // [ ] [addTemplateAsync] debug dependencies null case
+    // [ ] [ErrorHandler][checkDependencies] handle error case
+    // [ ] [ErrorHandler][exit][checkDependencies] handle error case
+
     // debug data Object
     // debug(util.inspect(data, {
     //   showHidden: false,
