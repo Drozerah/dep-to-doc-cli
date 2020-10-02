@@ -331,3 +331,36 @@ describe('Test suit for ƒ addTemplateAsync', function () {
     })
   })
 })
+
+describe.only('Test suit for ƒ checkDependencies', function () {
+  it('should throw with TypeError', function () {
+    expect(() => lib.checkDependencies()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
+  })
+  it('should throw with Error', function () {
+    // error cases
+    // is empty object
+    let case_0 = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_0_package.json')
+    case_0 = fs.readFileSync(case_0, 'utf-8')
+    case_0 = JSON.parse(case_0)
+    expect(() => lib.checkDependencies(case_0)).to.throw(Error, 'Error: no registered dependencies')
+
+    // happy paths
+    let case_1 = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_1_package.json')
+    case_1 = fs.readFileSync(case_1, 'utf-8')
+    case_1 = JSON.parse(case_1)
+    expect(lib.checkDependencies(case_1)).to.be.an('object')
+    expect(lib.checkDependencies(case_1)).to.deep.equal(case_1)
+
+    let case_2 = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_2_package.json')
+    case_2 = fs.readFileSync(case_2, 'utf-8')
+    case_2 = JSON.parse(case_2)
+    expect(lib.checkDependencies(case_2)).to.be.an('object')
+    expect(lib.checkDependencies(case_2)).to.deep.equal(case_2)
+
+    let case_3 = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_3_package.json')
+    case_3 = fs.readFileSync(case_3, 'utf-8')
+    case_3 = JSON.parse(case_3)
+    expect(lib.checkDependencies(case_3)).to.be.an('object')
+    expect(lib.checkDependencies(case_3)).to.deep.equal(case_3)
+  })
+})
