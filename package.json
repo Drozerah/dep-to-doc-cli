@@ -4,7 +4,7 @@
   "description": "Document your npm dependencies into your README.md file",
   "main": "bin/cli.js",
   "bin": {
-    "deptodoccli": "bin/cli.js"
+    "deptodoc": "bin/cli.js"
   },
   "directories": {
     "lib": "lib"
@@ -18,10 +18,7 @@
     "coverage:dev": "nyc npm run test",
     "doc": "jsdoc -c jsdoc.json"
   },
-  "keywords": [],
-  "author": "Thomas G. aka Drozerah <drozerah@gmail.com> (https://github.com/Drozerah)",
-  "license": "ISC",
-  "private": true,
+  "keywords": ["cli", "documentation", "readme", "dependencies"],
   "devDependencies": {
     "better-docs": "^2.3.2",
     "chai": "^4.2.0",
@@ -45,8 +42,22 @@
     "inquirer": "^7.3.3",
     "underscore": "^1.11.0"
   },
+  "homepage": "https://github.com/Drozerah/dep-to-doc-cli.git",
   "repository": {
     "type": "git",
     "url": "https://github.com/Drozerah/dep-to-doc-cli.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/Drozerah/dep-to-doc-cli/issues"
+  },
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "author": {
+    "name": "Thomas G. aka Drozerah",
+    "email": "drozerah@gmail.com",
+    "url": "https://github.com/Drozerah"
+  },
+  "license": "ISC",
+  "private": false
 }
