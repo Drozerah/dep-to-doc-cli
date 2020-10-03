@@ -111,7 +111,6 @@ describe('Test suit for ƒ ErrorHandler', function () {
     expect(spy.calledWith(arg)).to.be.true
     spy.restore()
   })
-
   it('2 should call ƒ exit once with argument', function () {
     const spy = sinon.spy(lib, 'exit')
     const arg = 'TypeError: invalid argument type'
@@ -125,9 +124,20 @@ describe('Test suit for ƒ ErrorHandler', function () {
   })
   it('3 should call ƒ exit once with argument', function () {
     const spy = sinon.spy(lib, 'exit')
-    const arg = 'Tag not found'
+    const arg = 'Error: tag not found'
     const obj = {
       code: 'ERR_TAG_NOT_FOUND'
+    }
+    lib.ErrorHandler(obj)
+    expect(spy.calledOnce).to.be.true
+    expect(spy.calledWith(arg)).to.be.true
+    spy.restore()
+  })
+  it('4 should call ƒ exit once with argument', function () {
+    const spy = sinon.spy(lib, 'exit')
+    const arg = 'Error: no registered dependencies'
+    const obj = {
+      code: 'ERR_DEPENDENCIES_NOT_FOUND'
     }
     lib.ErrorHandler(obj)
     expect(spy.calledOnce).to.be.true
@@ -153,9 +163,17 @@ describe('Test suit for ƒ exit', function () {
     expect(stub.calledThrice).to.be.true
     stub.restore()
   })
-  it('should log "Tag not found"', function () {
+  it('should log "Error: tag not found"', function () {
     const stub = sinon.stub(console, 'log')
-    const arg = 'Tag not found'
+    const arg = 'Error: tag not found'
+    lib.exit(arg)
+    expect(stub.calledWith(arg)).to.be.true
+    expect(stub.calledThrice).to.be.true
+    stub.restore()
+  })
+  it('should log "Error: no registered dependencies"', function () {
+    const stub = sinon.stub(console, 'log')
+    const arg = 'Error: no registered dependencies'
     lib.exit(arg)
     expect(stub.calledWith(arg)).to.be.true
     expect(stub.calledThrice).to.be.true
@@ -329,7 +347,7 @@ describe('Test suit for ƒ addTemplateAsync', function () {
       // console.log(error.message) // !DEBUG
       // console.log('----------------------') // !DEBUG
       expect(error.name).to.equal('Error')
-      expect(error.message).to.equal('Tag not found')
+      expect(error.message).to.equal('Error: tag not found')
     })
   })
   it('Promise resolved with true type response', function () {
