@@ -31,7 +31,9 @@ const helper = require('./test/helpers')
  */
 const {
   structuringDataAsync_expected_data_structure_1,
-  structuringDataAsync_input_data_structure_1
+  structuringDataAsync_input_data_structure_1,
+  structuringDataAsync_expected_data_structure_2,
+  structuringDataAsync_expected_data_structure_3
 } = require('./test/data/structuringDataAsync')
 
 const template_chunks = require('./test/data/template/index')
@@ -310,6 +312,22 @@ describe('Test suit for ƒ createTemplate', function () {
     expect(lib.createTemplate(expected_result)).to.be.a('string')
     expect(lib.createTemplate(expected_result)).to.have.length.above(10)
     expect(lib.createTemplate(expected_result)).to.contains(template_chunks.dependencies)
+    expect(lib.createTemplate(expected_result)).to.contains(template_chunks.devDependencies)
+  })
+  it('should render a well formatted template', function () {
+    const expected_result = structuringDataAsync_expected_data_structure_2
+
+    expect(lib.createTemplate(expected_result)).to.be.a('string')
+    expect(lib.createTemplate(expected_result)).to.have.length.above(10)
+    expect(lib.createTemplate(expected_result)).to.contains(template_chunks.dependencies)
+    expect(lib.createTemplate(expected_result)).to.not.contains(template_chunks.devDependencies)
+  })
+  it('should render a well formatted template', function () {
+    const expected_result = structuringDataAsync_expected_data_structure_3
+
+    expect(lib.createTemplate(expected_result)).to.be.a('string')
+    expect(lib.createTemplate(expected_result)).to.have.length.above(10)
+    expect(lib.createTemplate(expected_result)).to.not.contains(template_chunks.dependencies)
     expect(lib.createTemplate(expected_result)).to.contains(template_chunks.devDependencies)
   })
 })
