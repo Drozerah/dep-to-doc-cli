@@ -225,7 +225,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_0_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
-    const expected_data_structure = { dependencies: null, devDependencies: null }
+    const expected_data_structure = { dependencies: [], devDependencies: [] }
     return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
       expect(res).to.deep.equal(expected_data_structure)
     })
@@ -245,7 +245,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_2_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
-    const expected_data_structure = { dependencies: null, devDependencies: ['drozerah'] }
+    const expected_data_structure = { dependencies: [], devDependencies: ['drozerah'] }
     return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
       expect(res).to.deep.equal(expected_data_structure)
     })
@@ -255,7 +255,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_3_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
-    const expected_data_structure = { dependencies: ['web_dev'], devDependencies: null }
+    const expected_data_structure = { dependencies: ['web_dev'], devDependencies: [] }
     return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
       expect(res).to.deep.equal(expected_data_structure)
     })
