@@ -90,11 +90,7 @@ const runCliAsync = async () => {
 
     // TODO
     // [ ] [createTemplate][signature] add dynamic version and cli name
-    // [ ] [addTemplateAsync] debug dependencies null case
-    // [x] [ErrorHandler][checkDependencies] handle error case
-    // [x] [ErrorHandler][checkDependencies] add new test
-    // [x] [ErrorHandler][exit][checkDependencies] handle error case
-    // [x] [ErrorHandler][exit][checkDependencies] add new test
+    // [ ] [createTemplateAsync] fix template for empty dependencies Array
 
     // debug data Object
     // debug(util.inspect(data, {
