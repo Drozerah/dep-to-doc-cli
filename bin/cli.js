@@ -89,8 +89,8 @@ const runCliAsync = async () => {
     await lib.addTemplateAsync(md.file, template)
 
     // TODO
-    // [ ] [checkDependencies] add test suit
-    // [ ] [extractDependenciesAsync] add test cases for empty Objects + files
+    // [X] [checkDependencies] add test suit
+    // [X] [extractDependenciesAsync] add test cases for empty Objects + files
     // [ ] [createTemplate][signature] add dynamic version and cli name
     // [ ] [addTemplateAsync] debug dependencies null case
     // [ ] [ErrorHandler][checkDependencies] handle error case

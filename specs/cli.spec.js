@@ -204,6 +204,16 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
   })
   it('2 Promise resolved with response Object', function () {
     this.timeout(0)
+    const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_0_package.json')
+    let data = fs.readFileSync(file_path, 'utf-8')
+    data = JSON.parse(data)
+    const expected_data_structure = { dependencies: null, devDependencies: null }
+    return expect(lib.extractDependenciesAsync(data)).to.eventually.be.fulfilled.then((res) => {
+      expect(res).to.deep.equal(expected_data_structure)
+    })
+  })
+  it('3 Promise resolved with response Object', function () {
+    this.timeout(0)
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_1_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
     data = JSON.parse(data)
@@ -212,7 +222,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
       expect(res).to.deep.equal(expected_data_structure)
     })
   })
-  it('3 Promise resolved with response Object', function () {
+  it('4 Promise resolved with response Object', function () {
     this.timeout(0)
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_2_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
@@ -222,7 +232,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
       expect(res).to.deep.equal(expected_data_structure)
     })
   })
-  it('4 Promise resolved with response Object', function () {
+  it('5 Promise resolved with response Object', function () {
     this.timeout(0)
     const file_path = path.resolve(process.cwd(), 'specs/test/data/extractDependenciesAsync/test_3_package.json')
     let data = fs.readFileSync(file_path, 'utf-8')
@@ -332,7 +342,7 @@ describe('Test suit for ƒ addTemplateAsync', function () {
   })
 })
 
-describe.only('Test suit for ƒ checkDependencies', function () {
+describe('Test suit for ƒ checkDependencies', function () {
   it('should throw with TypeError', function () {
     expect(() => lib.checkDependencies()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
   })
