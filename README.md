@@ -1,18 +1,49 @@
-# Dependencies To Documentation
+_Cross platform Command Line Interface utility with Node.js_
 
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+<h1 align="center" style="border:none !important;">
+  Dependencies To Documentation
+</h1>
 
-> Document your npm dependencies into your README.md file
+<div align="center">
+
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![npm](https://img.shields.io/npm/v/mkdird.svg?style=flat-square) ![node](https://img.shields.io/node/v/mkdird.svg?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/drozerah/mkdird-cli.svg?style=flat-square) ![GitHub pull requests](https://img.shields.io/github/issues-pr/drozerah/mkdird-cli.svg?style=flat-square) [![Known Vulnerabilities](https://snyk.io/test/github/Drozerah/mkdird-cli/badge.svg?style=flat-square)](https://snyk.io/test/github/Drozerah/mkdird-cli) ![NPM](https://img.shields.io/npm/l/mkdird.svg?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/drozerah/mkdird-cli.svg?style=flat-square) 
+
+</div>
+
+__Document your npm dependencies into your README.md file : dep to doc !__
 
 > TODO: write a better README.md
-
 
 Table of Contents
 -----------------
 
+- [Install](#install)
+- [Usage](#usage)
 - [List of Packages](#list-of-packages)
 - [Coverage](#coverage)
+- [Author](#author)
+- [Lisence](#license)
 
+Install
+-------
+
+We recommend to install dep to doc globally 
+````bash
+$ npm install deptodoc --global
+````
+
+Usage
+-----
+
+````bash
+$ deptodoc
+````
+
+README file
+````
+~~{dependencies}~~
+````
+Add the following tag `~~{dependencies}~~` into your `README.md` file, then run the command `deptodoc`, the cli will replace the tag with your list of installed dependencies.
 
 List of Packages
 ----------------
@@ -56,10 +87,12 @@ Coverage
 
 - [nyc report](/public/reports/index.html)
 
-__Author__
+Author
+------
 
 - Thomas G. aka Drozerah - [GitHub](https://github.com/Drozerah)
 
-__License__
+License
+-------
 
 - [ISC](licence) © Thomas G. aka Drozerah
