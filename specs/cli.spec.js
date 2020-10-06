@@ -5,6 +5,7 @@
  */
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 /**
  *  NPM modules
  */
@@ -281,7 +282,7 @@ describe('Test suite for ƒ createMarkdownLink', function () {
   })
 })
 
-describe('Test suite for ƒ structuringDataAsync', function () {
+describe.only('Test suite for ƒ structuringDataAsync', function () {
   it('Promise rejected with TypeError', function () {
     this.timeout(0)
     return expect(lib.structuringDataAsync()).to.eventually.be.rejected.then((error) => {
@@ -293,7 +294,60 @@ describe('Test suite for ƒ structuringDataAsync', function () {
     this.timeout(0)
     return expect(lib.structuringDataAsync(structuringDataAsync_input_data_structure_1))
       .to.eventually.be.fulfilled.then((res) => {
-        expect(res).to.deep.equal(structuringDataAsync_expected_data_structure_1)
+        // console.log('-----------Res-----------') // !DEBUG
+        // console.log(util.inspect(res, {
+        //   showHidden: false,
+        //   depth: null
+        // }))
+        // console.log('-----------Ref-----------') // !DEBUG
+        // console.log(util.inspect(structuringDataAsync_input_data_structure_1, {
+        //   showHidden: false,
+        //   depth: null
+        // }))
+        console.log('-------------------[cross-env]--------------------') // !DEBUG
+        const package_path0 = path.join(process.cwd(), 'node_modules', 'cross-env', 'package.json')
+        console.log(util.inspect(package_path0, {
+          showHidden: false,
+          depth: null
+        }))
+        console.log('--------------------------------------------------') // !DEBUG
+        const read_package0 = fs.readFileSync(package_path0, 'utf8')
+        // parse JSON to JS Object
+        const package_json0 = JSON.parse(read_package0)
+        console.log(util.inspect(package_json0.homepage, {
+          showHidden: false,
+          depth: null
+        }))
+        console.log('-------------------[inquirer]---------------------') // !DEBUG
+        const package_path1 = path.join(process.cwd(), 'node_modules', 'inquirer', 'package.json')
+        console.log(util.inspect(package_path1, {
+          showHidden: false,
+          depth: null
+        }))
+        console.log('--------------------------------------------------') // !DEBUG
+        const read_package1 = fs.readFileSync(package_path1, 'utf8')
+        // parse JSON to JS Object
+        const package_json1 = JSON.parse(read_package1)
+        console.log(util.inspect(package_json1.homepage, {
+          showHidden: false,
+          depth: null
+        }))
+        console.log('-------------------[mocha]------------------------') // !DEBUG
+        const package_path2 = path.join(process.cwd(), 'node_modules', 'mocha', 'package.json')
+        console.log(util.inspect(package_path2, {
+          showHidden: false,
+          depth: null
+        }))
+        console.log('--------------------------------------------------') // !DEBUG
+        const read_package2 = fs.readFileSync(package_path2, 'utf8')
+        // parse JSON to JS Object
+        const package_json2 = JSON.parse(read_package2)
+        console.log(util.inspect(package_json2.homepage, {
+          showHidden: false,
+          depth: null
+        }))
+        console.log('----------------------END-------------------------') // !DEBUG
+        return expect(res).to.deep.equal(structuringDataAsync_expected_data_structure_1)
       })
       .then((res) => {
         expect(spy.called).to.be.true

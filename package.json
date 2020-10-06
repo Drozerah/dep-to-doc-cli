@@ -20,7 +20,12 @@
     "doc": "jsdoc -c jsdoc.json",
     "eslint": "eslint . --ext .js"
   },
-  "keywords": ["cli", "documentation", "readme", "dependencies"],
+  "keywords": [
+    "cli",
+    "documentation",
+    "readme",
+    "dependencies"
+  ],
   "devDependencies": {
     "better-docs": "^2.3.2",
     "chai": "^4.2.0",
