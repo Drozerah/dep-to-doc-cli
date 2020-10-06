@@ -6,7 +6,9 @@ _Cross platform Command Line Interface utility with Node.js_
 
 <div align="center">
 
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![npm](https://img.shields.io/npm/v/mkdird.svg?style=flat-square) ![node](https://img.shields.io/node/v/mkdird.svg?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/drozerah/mkdird-cli.svg?style=flat-square) ![GitHub pull requests](https://img.shields.io/github/issues-pr/drozerah/mkdird-cli.svg?style=flat-square) [![Known Vulnerabilities](https://snyk.io/test/github/Drozerah/mkdird-cli/badge.svg?style=flat-square)](https://snyk.io/test/github/Drozerah/mkdird-cli) ![NPM](https://img.shields.io/npm/l/mkdird.svg?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/drozerah/mkdird-cli.svg?style=flat-square) 
+![CI](https://github.com/Drozerah/dep-to-doc-cli/workflows/CI/badge.svg)
+![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)
+![GitHub issues](https://img.shields.io/github/issues/Drozerah/dummy-github-ci-action)
 
 </div>
 
