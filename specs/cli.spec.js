@@ -51,14 +51,14 @@ describe('Start with dummy test', function () {
   })
 })
 
-describe('Test suit for ƒ dummy Promise', function () {
+describe('Test suite for ƒ dummy Promise', function () {
   it('Promise resolved', function () {
     this.timeout(0) // wait until resolution
     return expect(dummyPromise()).to.eventually.equal(6)
   })
 })
 
-describe('Test suit for ƒ accessFileAsync', function () {
+describe('Test suite for ƒ accessFileAsync', function () {
   it('Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.accessFileAsync()).to.eventually.be.rejected.then((error) => {
@@ -90,7 +90,7 @@ describe('Test suit for ƒ accessFileAsync', function () {
   })
 })
 
-describe('Test suit for ƒ ErrorHandler', function () {
+describe('Test suite for ƒ ErrorHandler', function () {
   it('should throw with TypeError', function () {
     expect(() => lib.ErrorHandler()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
     expect(() => lib.ErrorHandler(123)).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
@@ -148,7 +148,7 @@ describe('Test suit for ƒ ErrorHandler', function () {
   })
 })
 
-describe('Test suit for ƒ exit', function () {
+describe('Test suite for ƒ exit', function () {
   it('should throw with TypeError', function () {
     expect(() => lib.exit()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
     expect(() => lib.exit(123)).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
@@ -183,7 +183,7 @@ describe('Test suit for ƒ exit', function () {
   })
 })
 
-describe('Test suit for ƒ readFileAsync', function () {
+describe('Test suite for ƒ readFileAsync', function () {
   it('Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.readFileAsync()).to.eventually.be.rejected.then((error) => {
@@ -215,7 +215,7 @@ describe('Test suit for ƒ readFileAsync', function () {
   })
 })
 
-describe('Test suit for ƒ extractDependenciesAsync', function () {
+describe('Test suite for ƒ extractDependenciesAsync', function () {
   it('1 Promise rejected with TypeError and error code', function () {
     this.timeout(0)
     return expect(lib.extractDependenciesAsync()).to.eventually.be.rejected.then((error) => {
@@ -264,7 +264,7 @@ describe('Test suit for ƒ extractDependenciesAsync', function () {
   })
 })
 
-describe('Test suit for ƒ createMarkdownLink', function () {
+describe('Test suite for ƒ createMarkdownLink', function () {
   it('should throw with TypeError', function () {
     expect(() => lib.createMarkdownLink()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
   })
@@ -281,7 +281,7 @@ describe('Test suit for ƒ createMarkdownLink', function () {
   })
 })
 
-describe('Test suit for ƒ structuringDataAsync', function () {
+describe('Test suite for ƒ structuringDataAsync', function () {
   it('Promise rejected with TypeError', function () {
     this.timeout(0)
     return expect(lib.structuringDataAsync()).to.eventually.be.rejected.then((error) => {
@@ -302,7 +302,7 @@ describe('Test suit for ƒ structuringDataAsync', function () {
   })
 })
 
-describe('Test suit for ƒ createTemplate', function () {
+describe('Test suite for ƒ createTemplate', function () {
   it('should throw with TypeError', function () {
     expect(() => lib.createTemplate()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
   })
@@ -332,7 +332,7 @@ describe('Test suit for ƒ createTemplate', function () {
   })
 })
 
-describe('Test suit for ƒ addTemplateAsync', function () {
+describe('Test suite for ƒ addTemplateAsync', function () {
   before(function (done) {
     return helper.removeTemplateBeforeSync(done)
   })
@@ -378,7 +378,7 @@ describe('Test suit for ƒ addTemplateAsync', function () {
   })
 })
 
-describe('Test suit for ƒ checkDependencies', function () {
+describe('Test suite for ƒ checkDependencies', function () {
   it('should throw with TypeError', function () {
     expect(() => lib.checkDependencies()).to.throw(TypeError, 'ERR_INVALID_ARG_TYPE')
   })
