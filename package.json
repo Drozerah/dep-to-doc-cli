@@ -14,9 +14,11 @@
     "cli:debug": "set DEBUG=* & cross-env NODE_ENV=development node ./bin/cli.js",
     "test": "cross-env NODE_ENV=test mocha './specs/*.spec.js'",
     "test:debug": "set DEBUG=*, -mocha:* & cross-env NODE_ENV=test mocha './specs/*.spec.js'",
-    "coverage": "nyc --reporter=html --reporter=text npm run test",
+    "coverage": "nyc --check-coverage npm run test",
+    "coverage:doc": "nyc --reporter=html --reporter=text npm run test",
     "coverage:dev": "nyc npm run test",
-    "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json",
+    "eslint": "eslint . --ext .js"
   },
   "keywords": ["cli", "documentation", "readme", "dependencies"],
   "devDependencies": {
