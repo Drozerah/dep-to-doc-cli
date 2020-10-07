@@ -97,4 +97,4 @@ Author
 License
 -------
 
-- [ISC](licence) © Thomas G. aka Drozerah
+- [ISC](LICENCE) © Thomas G. aka Drozerah
