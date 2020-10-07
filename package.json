@@ -1,6 +1,6 @@
 {
   "name": "dep_to_doc_cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Document your npm dependencies into your README.md file",
   "main": "bin/cli.js",
   "bin": {
