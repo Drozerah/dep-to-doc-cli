@@ -3,7 +3,7 @@
  */
 
 const structuringDataAsync_input_data_structure_1 = {
-  dependencies: ['inquirer'],
+  dependencies: ['cross-env'],
   devDependencies: ['mocha']
 }
 
@@ -12,21 +12,21 @@ const structuringDataAsync_expected_data_structure_1 = {
     packages: [
       {
         package: {
-          name: 'inquirer',
+          name: 'cross-env',
           description: {
-            string: 'A collection of common interactive command line user interfaces',
-            length: 63
+            string: 'Run scripts that set and use environment variables across platforms',
+            length: 67
           },
-          url: 'https://github.com/SBoudrias/Inquirer.js#readme',
+          url: 'https://github.com/kentcdodds/cross-env#readme',
           markdown_link: {
-            string: '[inquirer](https://github.com/SBoudrias/Inquirer.js#readme)',
+            string: '[cross-env](https://github.com/kentcdodds/cross-env#readme)',
             length: 59
           }
         }
       }
     ],
     max_link_length: 59,
-    max_description_length: 63
+    max_description_length: 67
   },
   devDependencies: {
     packages: [
@@ -48,7 +48,7 @@ const structuringDataAsync_expected_data_structure_1 = {
 }
 
 const structuringDataAsync_input_data_structure_2 = {
-  dependencies: ['inquirer'],
+  dependencies: ['cross-env'],
   devDependencies: []
 }
 
@@ -57,21 +57,21 @@ const structuringDataAsync_expected_data_structure_2 = {
     packages: [
       {
         package: {
-          name: 'inquirer',
+          name: 'cross-env',
           description: {
-            string: 'A collection of common interactive command line user interfaces',
-            length: 63
+            string: 'Run scripts that set and use environment variables across platforms',
+            length: 67
           },
-          url: 'https://github.com/SBoudrias/Inquirer.js#readme',
+          url: 'https://github.com/kentcdodds/cross-env#readme',
           markdown_link: {
-            string: '[inquirer](https://github.com/SBoudrias/Inquirer.js#readme)',
+            string: '[cross-env](https://github.com/kentcdodds/cross-env#readme)',
             length: 59
           }
         }
       }
     ],
     max_link_length: 59,
-    max_description_length: 63
+    max_description_length: 67
   },
   devDependencies: {
     packages: [],
