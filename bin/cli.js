@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 'use strict'
 
 // Copyright (c) 2020 Thomas G. drozerah@gmail.com
@@ -10,18 +11,22 @@
  * Node Core Modules
  */
 // const util = require('util')
+
 /**
  * NPM modules
  */
 const debug = require('debug')('cli')
 const { prompt } = require('inquirer')
-// const { blue, green, red } = require('chalk')
 const { blue, green } = require('chalk')
+const commands = require('yargs')
+const open = require('open')
+
 /**
  * DEBUG
  */
 debug(`[APP][Mode][${process.env.NODE_ENV}]`)
 debug('[APP][processing]', __filename.replace(process.cwd(), ''))
+
 /**
  * Modules
  */
@@ -109,20 +114,52 @@ const runCliAsync = async () => {
   }
 }
 
-runCliAsync()
-  .then(res => {
-    debug('↪ .then')
-    debug(' ↪ show ending message 1')
-    console.log(green(`=> ${res}`))
-    debug(' ↪ show ending message 2')
-    console.log(blue('Thank you for using CLI !'))
-    debug('↪ exit from CLI process')
+const { name, description, author, bugs, homepage } = require('../package.json')
+const epilogue = `Thank you for using ${name} CLI !`
+
+// const event = new events.EventEmitter()
+// eslint-disable-next-line no-unused-expressions
+commands
+  .scriptName(name)
+  .usage(description)
+  .usage(`\nUsage: ${name} <command> [options]`)
+  .showHelpOnFail(true) // default action show help menu
+  .demandCommand(1, '') // at least 1 command required
+  .command(['run'], `Run ${name} CLI`, {}, _ => {
+  /**
+   * Run dep to doc CLI
+   */
+    runCliAsync()
+      .then(res => {
+        debug('↪ .then')
+        debug(' ↪ show ending message 1')
+        // print '=> done!' message
+        console.log(green(`=> ${res}`))
+        debug('↪ exit from CLI process')
+      })
+      .catch(err => {
+        debug('↪ .catch')
+        // check errors
+        debug('err =>>>', err)
+        debug('err.code =>>>', err.code)
+        debug('err.message =>>>', err.message)
+        return lib.ErrorHandler(err)
+      })
   })
-  .catch(err => {
-    debug('↪ .catch')
-    // check errors
-    debug('err =>>>', err)
-    debug('err.code =>>>', err.code)
-    debug('err.message =>>>', err.message)
-    return lib.ErrorHandler(err)
+  .command(['home'], 'Open in browser home page', {}, _ => {
+    const cp = open(`${homepage}#readme`, { wait: false })
+    cp.then(cp => setTimeout(() => process.exit(), 500))
   })
+  .command(['issues'], 'Open in browser issues page on GitHub', {}, _ => {
+    const cp = open(bugs.url, { wait: false })
+    cp.then(cp => setTimeout(() => process.exit(), 500))
+  })
+  .command(['author'], 'Open in browser author page on GitHub', {}, _ => {
+    const cp = open(author.url, { wait: false })
+    cp.then(cp => setTimeout(() => process.exit(), 500))
+  })
+  .alias('v', 'version')
+  .alias('h', 'help')
+  .epilogue(`${epilogue}`)
+  .locale('en')
+  .argv
