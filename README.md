@@ -52,7 +52,7 @@ Done !
 __Notes:__
 
 - the generated markdown also provides a usefull minimum __table of contents__ anchor navigation you can use to structure your documentation page
-- you will have to remove the generated markdoww table of your dependencies and run the cli again in order to include new packages...
+- you will have to remove the generated markdown table of your dependencies and run the cli again in order to include new packages...
 
 Help
 ----
